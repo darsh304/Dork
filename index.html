@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dorks of Crypto - $Dorcs</title>
+    <link rel="icon" href="/imgs/logo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Darsh&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0d0d0d;
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Prevent horizontal scroll */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: slideIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: #00f5d4;
+            text-shadow: 0 0 10px #00f5d4;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1.5s forwards 0.5s;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #e0e0e0;
+            opacity: 0;
+            animation: fadeInUp 1.5s forwards 1s;
+        }
+
+        /* About Section */
+        .about {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 5rem 0;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: #00f5d4;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1.5s forwards 0.5s;
+        }
+
+        .text-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .about-image {
+            height: 500px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Success Stories Section */
+        .success-stories {
+            min-height: 100vh;
+            padding: 5rem 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .success-stories h2 {
+            font-size: 2.5rem;
+            color: #00f5d4;
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1.5s forwards 0.5s;
+        }
+
+        .story-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .story-card {
+            background-color: #111827;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 1.5s forwards 1s;
+        }
+
+        .story-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Call to Action Section */
+        .cta {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        .cta-bg {
+            position: absolute;
+            inset: 0;
+        }
+
+        .cta-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            color: #00f5d4;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1.5s forwards 0.5s;
+        }
+
+        .cta-button {
+            background-color: #00f5d4;
+            color: black;
+            font-weight: bold;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1.125rem;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1.5s forwards 1s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background-color: black;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .story-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 300px;
+            }
+        }
+
+        /* Social media icons container */
+        .social-media {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            /* Center icons */
+            align-items: center;
+            gap: 20px;
+            /* Space between icons */
+        }
+
+        /* Social media icon styles */
+        .social-icon {
+            font-size: 2rem;
+            /* Default icon size */
+            color: inherit;
+            /* Inherit the color from the parent (which is set by the title) */
+            text-decoration: none;
+            /* Remove underline */
+            transition: color 0.3s ease, transform 0.3s ease;
+            /* Smooth transition for color and hover effect */
+        }
+
+        /* Hover effect: change color */
+        .social-icon:hover {
+            color: inherit;
+            /* Change to title color */
+            transform: scale(1.1);
+            /* Slightly enlarge on hover */
+        }
+
+        /* Responsive icon sizes */
+        @media (max-width: 1200px) {
+            .social-icon {
+                font-size: 1.8rem;
+                /* Slightly smaller on medium screens */
+            }
+        }
+
+        @media (max-width: 992px) {
+            .social-icon {
+                font-size: 1.5rem;
+                /* Smaller on tablet screens */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .social-icon {
+                font-size: 1.2rem;
+                /* Smallest on mobile screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=2832"
+                alt="Crypto background">
+        </div>
+        <div class="hero-content">
+            <h1>Dorks of Crypto ($Dorcs)</h1>
+            <p>Where Gut Feelings Beat Graphs</p>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About $Dorcs</h2>
+                    <div class="text-content">
+                        <p>In the sprawling digital wilderness of cryptocurrency, where fortunes are flipped like
+                            pancakes and memes are minted at the speed of light, there roamed a Dork. This dork wasn't
+                            just any trader; he was the kind who thought if he stared at the crypto charts long enough,
+                            they'd start whispering their secrets, much like trying to decode modern art by blinking
+                            rapidly. His oversized glasses, perpetually fogged from the steam of his endless ramen
+                            marathons, and a keyboard that had seen more action than a Call of Duty marathon, labeled
+                            him as the poster child of crypto dorkiness.</p>
+                        <p>His wealth? Oh, it was the stuff of forum legends. Not due to any trading prowess, mind you,
+                            but because he once mistook a meme coin for "SOLANA" in a late-night typo-fueled frenzy.
+                            That coin, in an astronomical twist of luck, rocketed so high it could've grazed the moon.
+                            Now, our dork, in his basement lair surrounded by what he lovingly calls his "Dorkiness
+                            Machines" (a collection of mining rigs that hum like a choir of tech-savvy bees), has taken
+                            to the next level of his crypto adventure.</p>
+                        <p>He's launched his own coin on Pump.fun, a platform where the wild and the weird of crypto
+                            gather. This coin, dubbed "Dorcs," isn't just another digital token; it's a beacon for all
+                            those who believe in the power of gut feelings over graphs, in the might of memes over
+                            market analysis. With all the dorks of crypto united on one narrative, he navigates the
+                            crypto seas not with the stars of technical analysis but with the compass of sheer luck,
+                            supportive dorky community, and a dash of dorky charm, proving that in the chaotic carnival
+                            of cryptocurrency, sometimes it's the dorkiest paths that lead to the most unexpected
+                            treasures.</p>
+                        <p>The path to becoming a billionaire often starts with a spark of dorkiness, a peculiar brand
+                            of passion mixed with an unyielding focus on what might seem, at first glance, utterly dorky
+                            to the uninitiated. Here's a humorous take on how some of the world's richest might have
+                            started as dorks:</p>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="imgs/logo.jpg" alt="Crypto workspace">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="success-stories">
+        <div class="container">
+            <h2>Success Stories of Famous Dorks</h2>
+            <div class="story-cards">
+                <div class="story-card">
+                    <img src="/imgs/bill gates.jpg" alt="Coding setup">
+                    <div class="card-content">
+                        <h3>The Coding Genius</h3>
+                        <p>From basement coder to tech titan, Bill Gates revolutionized the computing world. Starting
+                            with BASIC programming in the late 1970s, his perseverance and brilliance led to the
+                            creation of Microsoft, making him one of the richest people in the world. His journey from a
+                            nerdy teen with a love for tech to a global tech mogul proves that a strong coding
+                            foundation can lead to monumental success.</p>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="imgs/jeff.jpg"
+                        alt="Data visualization">
+                    <div class="card-content">
+                        <h3>The Data Wizard</h3>
+                        <p>Turning algorithms into gold, Jeff Bezos started his career in finance but quickly pivoted to
+                            create Amazon, an e-commerce giant that now dominates the online marketplace. His ability to
+                            predict market trends, innovate logistics, and constantly scale his business has earned him
+                            a spot as one of the most successful entrepreneurs of the 21st century. From humble
+                            beginnings to a space-faring CEO, Bezos is a true data wizard.</p>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="imgs/elon mask.jpg" alt="Innovation space">
+                    <div class="card-content">
+                        <h3>The Innovator</h3>
+                        <p>Breaking boundaries with dorky determination, Elon Musk has reshaped the world of technology
+                            and space travel. From the creation of Tesla and SpaceX to his ventures in solar energy,
+                            Musk's vision for a sustainable future, backed by his early days of coding and tinkering,
+                            has made him one of the most innovative figures of our time. The self-proclaimed "dork"
+                            turned innovator is now at the helm of some of the most groundbreaking companies of the
+                            century.</p>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="imgs/mark.jpg"
+                        alt="Mark Zuckerberg">
+                    <div class="card-content">
+                        <h3>The Social Networker</h3>
+                        <p>Mark Zuckerberg, the Harvard dropout who revolutionized the way we interact online, proved
+                            that a simple idea could change the world. Facebook, born out of a dorm room project, has
+                            become the backbone of social media worldwide. Zuckerberg's evolution from a college "dork"
+                            coding late into the night to leading one of the biggest tech companies in the world shows
+                            that even the geekiest ideas can scale beyond imagination.</p>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="imgs/jack.jpg" alt="Jack Dorsey">
+                    <div class="card-content">
+                        <h3>The Tweet Master</h3>
+                        <p>Jack Dorsey, creator of Twitter, started by building a simple messaging platform that evolved
+                            into one of the most influential social media platforms in the world. His dedication to
+                            creating a platform where people could share ideas in real-time has reshaped communication
+                            worldwide. From a self-described "tech dork" to the CEO of two major tech companies,
+                            Dorsey’s story is a testament to how far one can go by following their passion for coding
+                            and innovation.</p>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="imgs/Larry Page and Sergey Brin.jpg" alt="Larry Page and Sergey Brin">
+                    <div class="card-content">
+                        <h3>The Google Dorks</h3>
+                        <p>Larry Page and Sergey Brin, the Google founders, were quintessential dorks. They started
+                            working out of a garage, obsessing over algorithms and data. Their dorky project to organize
+                            the world’s information has made them billionaires. From simple beginnings to creating one
+                            of the most powerful companies globally, their story is one of innovation, perseverance, and
+                            a lot of coding.</p>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <img src="imgs/Warren Buffett.jpg" alt="Warren Buffett">
+                    <div class="card-content">
+                        <h3>The Oracle of Omaha</h3>
+                        <p>While not a tech dork, Warren Buffett’s early obsession with numbers, stocks, and value
+                            investing would have made him a dork in the financial world. His dedication to reading
+                            financial statements and analyzing markets with meticulous care earned him the nickname
+                            "Oracle of Omaha." His financial dorkiness turned into the formula for one of the world’s
+                            wealthiest individuals.</p>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <img src="imgs/Steve Jobs.jpg" alt="Steve Jobs">
+                    <div class="card-content">
+                        <h3>The Design Guru</h3>
+                        <p>Before becoming an icon of innovation, Steve Jobs was known for his quirky, almost dorky
+                            demeanor. He was obsessed with design and user experience in a way that was unconventional
+                            at the time. His dorkiness in pushing for a user-friendly computer revolutionized personal
+                            computing and changed the world of technology forever.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="cta-bg">
+            <img src="https://images.unsplash.com/photo-1642790551116-18e150f248e3?auto=format&fit=crop&q=80&w=2832"
+                alt="Crypto future">
+        </div>
+        <div class="cta-content">
+            <h2>Join the $Dorcs Movement</h2>
+            <button class="cta-button">Get $Dorcs Now</button>
+
+            <!-- Social Media Icons -->
+            <div class="social-media">
+                <a href="https://t.me/your_telegram_link" target="_blank" class="social-icon"><i
+                        class="fab fa-telegram"></i></a>
+                <a href="https://twitter.com/your_twitter_link" target="_blank" class="social-icon"><i
+                        class="fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/your_facebook_link" target="_blank" class="social-icon"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/your_instagram_link" target="_blank" class="social-icon"><i
+                        class="fab fa-instagram"></i></a>
+                <!-- Add more icons as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Dorks of Crypto. All rights reserved.</p>
+    </footer>
+
+
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        // Three.js Scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // Shiny Coin
+        const textureLoader = new THREE.TextureLoader();
+        const texture = textureLoader.load('https://threejs.org/examples/textures/metal.jpg');
+
+        const geometry = new THREE.CylinderGeometry(2, 2, 0.2, 64);
+        const material = new THREE.MeshStandardMaterial({ map: texture, metalness: 1, roughness: 0 });
+        const coin = new THREE.Mesh(geometry, material);
+        scene.add(coin);
+
+        const light = new THREE.PointLight(0xffffff, 2, 100);
+        light.position.set(5, 5, 5);
+        scene.add(light);
+
+        camera.position.z = 5;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            coin.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // GSAP Animations
+        gsap.from(".title", { duration: 2, opacity: 0, y: -50, ease: "power2.out" });
+        gsap.from(".subtitle", { duration: 2, opacity: 0, y: 50, delay: 0.5, ease: "power2.out" });
+        gsap.from(".cta-button", { duration: 1, scale: 0, delay: 1, ease: "elastic.out(1, 0.5)" });
+
+        // Scroll Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.from("#about h2", {
+            scrollTrigger: { trigger: "#about", start: "top center" },
+            opacity: 0,
+            x: -100,
+            duration: 1.5
+        });
+
+        gsap.from("#success h2", {
+            scrollTrigger: { trigger: "#success", start: "top center" },
+            opacity: 0,
+            x: 100,
+            duration: 1.5
+        });
+
+        gsap.from("#call-to-action", {
+            scrollTrigger: { trigger: "#call-to-action", start: "top center" },
+            scale: 0.5,
+            opacity: 0,
+            duration: 1.5,
+            ease: "bounce"
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            const observerOptions = {
+                threshold: 0.5,  // 50% of the element must be visible
+            };
+
+            // Create the Intersection Observer
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add class when element enters the viewport
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target); // Stop observing after the element is in view
+                    }
+                });
+            }, observerOptions);
+
+            // Target all elements that should animate on scroll
+            document.querySelectorAll('.animate-on-scroll').forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+    </script>
+</body>
+
+</html>
